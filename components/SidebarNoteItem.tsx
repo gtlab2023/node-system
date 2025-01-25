@@ -2,7 +2,7 @@
 import dayjs from 'dayjs';
 import SidebarNoteItemContent from '@/components/SidebarNoteItemContent';
 
-export default function SidebarNoteItem({ noteId, note}) {
+export default function SidebarNoteItem({ noteId, note}:{noteId:string, note:any}) {
 
   const { title, content = '', updateTime } = note;
   return (

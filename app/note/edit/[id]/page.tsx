@@ -1,7 +1,7 @@
 import NoteEditor from '@/components/NoteEditor'
 import {getNote} from '@/lib/redis';
 
-export default async function EditPage({ params }) {
+export default async function EditPage({ params }:{params:{id:string}}) {
   const noteId = params.id;
   const note = await getNote(noteId)
 

@@ -1,6 +1,6 @@
 import { useFormStatus } from 'react-dom'
 
-export default function EditButton({ formAction }) {
+export default function SaveButton({ formAction }:{formAction:any}) {
   const { pending } = useFormStatus()
 
   return (
@@ -11,7 +11,7 @@ export default function EditButton({ formAction }) {
       disabled={pending}
       role="menuitem"
     >
-      {pending ? 'Saving' : 'Done'}
+      {pending ? '保存中' : '保存'}
     </button>
   );
 }

@@ -1,7 +1,7 @@
 import Note from '@/components/Note'
 import {getNote} from '@/lib/redis';
 
-export default async function Page({ params }) {
+export default async function Page({ params }:{params:{id:string}}) {
   // 动态路由 获取笔记 id
   const noteId = params.id;
   const note = await getNote(noteId)
@@ -19,3 +19,4 @@ export default async function Page({ params }) {
   return <Note noteId={noteId} note={note} />
 }
 
+export const runtime = 'edge';

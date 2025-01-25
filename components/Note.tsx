@@ -1,7 +1,16 @@
 import dayjs from 'dayjs';
 import NotePreview from '@/components/NotePreview'
 import EditButton from '@/components/EditButton'
-export default function Note({ noteId, note }) {
+
+type TNoteProps = {
+  noteId: string,
+  note: {
+    title: string,
+    content: string,
+    updateTime: string
+  }
+}
+export default function Note({ noteId, note }:TNoteProps) {
   const { title, content, updateTime } = note
 
   return (
@@ -12,7 +21,7 @@ export default function Note({ noteId, note }) {
           <small className="note-updated-at" role="status">
             上次更新于{dayjs(updateTime).format('YYYY-MM-DD hh:mm:ss')}
           </small>
-            <EditButton noteId={noteId}>Edit</EditButton>
+            <EditButton noteId={noteId}>编辑</EditButton>
         </div>
       </div>
       <NotePreview>{content}</NotePreview>

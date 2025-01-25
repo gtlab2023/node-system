@@ -9,16 +9,22 @@ import DeleteButton from '@/components/DeleteButton'
 
 const initialState = {
   message: null,
+  errors: null
 }
 
+type TNodeEditorProps = {
+  noteId: string | null
+  initialTitle: string
+  initialBody: string
+}
 export default function NoteEditor({
   noteId,
   initialTitle,
   initialBody
-}) {
+}:TNodeEditorProps) {
 
-  const [saveState, saveFormAction] = useFormState(saveNote, initialState)
-  const [delState, delFormAction] = useFormState(deleteNote, initialState)
+  const [saveState, saveFormAction] = useFormState(saveNote as any, initialState)
+  const [delState, delFormAction] = useFormState(deleteNote as any, initialState)
 
   const [title, setTitle] = useState(initialTitle)
   const [body, setBody] = useState(initialBody)
@@ -42,7 +48,7 @@ export default function NoteEditor({
         </div>
         <div className="note-editor-menu">
           { saveState?.message }
-          { saveState.errors && saveState.errors[0].message }
+          { saveState.errors  }
         </div>
         <label className="offscreen" htmlFor="note-title-input">
           Enter a title for your note
@@ -57,7 +63,7 @@ export default function NoteEditor({
           }}
         />
         <label className="offscreen" htmlFor="note-body-input">
-          Enter the body for your note
+          输入note信息
         </label>
         <textarea
           name="body"
@@ -68,7 +74,7 @@ export default function NoteEditor({
       </form>
       <div className="note-editor-preview">
         <div className="label label--preview" role="status">
-          Preview
+          预览
         </div>
         <h1 className="note-title">{title}</h1>
         <NotePreview>{body}</NotePreview>

@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useRef, useEffect, useTransition } from 'react';
+import { useState, useRef, useEffect, useTransition, DOMElement } from 'react';
 import { useRouter, usePathname } from 'next/navigation'
 
 export default function SidebarNoteContent({
@@ -8,7 +8,7 @@ export default function SidebarNoteContent({
   title,
   children,
   expandedChildren,
-}) {
+}:{id:string, title:string, children:any, expandedChildren:any}) {
   const router = useRouter()
   const pathname = usePathname()
   const selectedId = pathname?.split('/')[1] || null
@@ -18,13 +18,16 @@ export default function SidebarNoteContent({
   const isActive = id === selectedId
 
   // Animate after title is edited.
-  const itemRef = useRef(null);
+  const itemRef = useRef<null | HTMLDivElement>(null);
   const prevTitleRef = useRef(title);
 
   useEffect(() => {
     if (title !== prevTitleRef.current) {
       prevTitleRef.current = title;
-      itemRef.current.classList.add('flash');
+      if(itemRef?.current) {
+        itemRef.current!.classList.add('flash');
+      }
+     
     }
   }, [title]);
 
@@ -32,7 +35,7 @@ export default function SidebarNoteContent({
     <div
       ref={itemRef}
       onAnimationEnd={() => {
-        itemRef.current.classList.remove('flash');
+        itemRef?.current &&  (itemRef.current )?.classList.remove('flash');
       }}
       className={[
         'sidebar-note-list-item',
@@ -52,10 +55,7 @@ export default function SidebarNoteContent({
             : '1px solid transparent',
         }}
         onClick={() => {
-          const sidebarToggle = document.getElementById('sidebar-toggle')
-          if (sidebarToggle) {
-            sidebarToggle.checked = true
-          }
+       
           router.push(`/note/${id}`)
         }}>
         Open note for preview

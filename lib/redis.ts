@@ -8,14 +8,13 @@ export async function getAllNotes() {
   return await redis.hgetall("notes");
 }
 
-export async function addNote(data) {
+export async function addNote(data:any) {
   const uuid = Date.now().toString();
   await redis.hset("notes", [uuid], data);
   return uuid;
 }
 
-export async function updateNote(uuid, data) {
-  console.log(123,22)
+export async function updateNote(uuid:string, data:any) {
   await redis.hset("notes", [uuid], data);
 }
 
@@ -31,7 +30,7 @@ export async function getNote(uuid: string) {
   }
 }
 
-export async function delNote(uuid) {
+export async function delNote(uuid:string) {
   return redis.hdel("notes", uuid);
 }
 
