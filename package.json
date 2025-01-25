@@ -14,12 +14,14 @@
   "dependencies": {
     "@cloudflare/next-on-pages": "^1.13.7",
     "dayjs": "^1.11.11",
+    "dns": "^0.2.2",
     "ioredis": "^5.4.1",
     "marked": "^14.1.2",
     "next": "14.2.3",
     "react": "^18",
     "react-dom": "^18",
     "sanitize-html": "^2.13.0",
+    "stream": "^0.0.3",
     "zod": "^3.23.8"
   },
   "devDependencies": {
